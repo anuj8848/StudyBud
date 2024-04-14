@@ -6,10 +6,16 @@
     <title>Home</title>
   </head>
   <body>
-    {% extends 'main.html' %} {% block content %}
+    {% extends 'main.html' %}
+
+    {% block content %}
+
     <h1>This is your Home</h1>
 
     <div>
+
+      <a href="{% url 'create-room' %}">Create Room</a>
+      <hr>
       <div>
         {% for room in rooms %}
         <div>
