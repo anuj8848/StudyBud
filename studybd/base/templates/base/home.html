@@ -10,10 +10,35 @@
 
     {% block content %}
 
-    <h1>This is your Home</h1>
+    <style>
+      .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+      }
+    </style>
+    <div class="home-container">
+
+      <div>
+        <h3>Browse Topic</h3>
+        <hr>
+
+        <div>
+          <a href="{% url 'home' %}">All</a>
+        </div>
+
+        {% for topic in topics%}
+        <div>
+          <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+        </div>
+        {% endfor %}
+      </div>
+
 
     <div>
 
+
+  <div>
+    <h5>{{room_count}} rooms available</h5>
       <a href="{% url 'create-room' %}">Create Room</a>
       <hr>
       <div>
@@ -25,10 +50,12 @@
           <h5>
             {{room.id}} ---<a href="{% url 'room' room.id %}">{{room.name}}</a>
           </h5>
-          <small>{{room.topic.topic}}</small>
+          <small>{{room.topic.name}}</small>
           <hr />
         </div>
 
+        </div>
+  </div>
         {% endfor %}
       </div>
     </div>
