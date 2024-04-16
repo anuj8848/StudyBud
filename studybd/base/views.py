@@ -41,7 +41,7 @@ def loginPage(request):
     return render(request,'base/login_register.html',contexts)
         
 
-
+#logout
 def logoutUser(request):
     logout(request)
     return redirect('home')
