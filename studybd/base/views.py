@@ -1,6 +1,10 @@
 from django.shortcuts import render,redirect
 from django.db.models import Q
 
+from django.contrib import messages
+
+from django.contrib.auth.models import User
+
 from .models import Room,Topic
 from .forms import RoomForm
 
@@ -12,6 +16,13 @@ from .forms import RoomForm
 # ]
 
 # Create your views here.
+
+def loginPage(request):
+    contexts={}
+  
+    return render(request,'base/login_register.html',contexts)
+    
+
 def home(request):
     
     q=request.GET.get('q') if request.GET.get('q')!=None else ""
