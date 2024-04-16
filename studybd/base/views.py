@@ -20,27 +20,32 @@ from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 def loginPage(request):
-    contexts={}
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
     
-    try:
-        user=User.objects.get(username=username)
-    except:
-        messages.error(request,"user doesn't exist!!!")
-        
-    user=authenticate(request,username=username, password=password)
+        try:
+            user=User.objects.get(username=username)
+        except:
+            messages.error(request,"user doesn't exist!!!")
+            
+        user=authenticate(request,username=username, password=password)
     
-    if user is not None:
-        login(request,user)
-        return redirect('home')
-    
-    else:
-        messages.error(request,'username or password does not exist!!!')
+        if user is not None:
+            login(request,user)
+            return redirect('home')
         
+        else:
+            messages.error(request,'username or password does not exist!!!')
+    contexts={}  
     return render(request,'base/login_register.html',contexts)
-    
+        
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
 
 def home(request):
     
