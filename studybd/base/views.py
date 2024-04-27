@@ -21,6 +21,9 @@ from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 def loginPage(request):
+    page='login'
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -38,7 +41,7 @@ def loginPage(request):
         
         else:
             messages.error(request,'username or password does not exist!!!')
-    contexts={}  
+    contexts={'page':page}  
     return render(request,'base/login_register.html',contexts)
         
 
@@ -47,6 +50,10 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+
+def registerPage(request):
+    page='register'
+    return render(request,'base/login_register.html')
 
 def home(request):
     
